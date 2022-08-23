@@ -3,7 +3,7 @@ const about = () => {
     <div>
       <h1>About</h1>
       <p>
-        This is my first next js project that i'm trying to make a simple
+        This is my first next js project that i am trying to make a simple
         multipage application to show my skills
       </p>
     </div>
