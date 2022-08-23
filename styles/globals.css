@@ -2,13 +2,13 @@
 
 body {
   margin-top: 10%;
-  background: #f2f2f2;
+  background: #ffffff;
   text-align: center;
   color: #333;
   font-family: "Nunito";
 }
 a {
-  color: #333;
+  color: rgb(255, 255, 255);
   text-decoration: none;
 }
 .content {
@@ -17,7 +17,7 @@ a {
 }
 nav {
   position: absolute;
-  background-color: rgba(121, 121, 121, 0.548);
+  background-color: rgba(0, 119, 255, 0.678);
   top: 0px;
   left: 0px;
   width: 100%;
@@ -29,11 +29,17 @@ nav {
   border-bottom: 1px solid #ddd;
 }
 nav a {
-  margin: 10px;
+  margin: 10px 50px 10px 10px;
+  text-align: center;
+}
+nav a:hover {
+  font-weight: bold;
 }
 nav h1 {
   padding: 10px 0;
-  margin: 10px;
+  font-size: 35px;
+  color: rgb(255, 255, 255);
+  margin: 10px 0px 10px 50px;
 }
 nav .logo {
   margin-right: auto;
@@ -41,12 +47,19 @@ nav .logo {
 footer {
   position: absolute;
   text-align: center;
-  background-color: rgba(121, 121, 121, 0.548);
+  background-color: rgba(56, 149, 255, 0.719);
   width: 100%;
-  padding: 30px 0;
+  padding: 20px 0;
   bottom: 0px;
   left: 0px;
   margin-top: 60px;
-  color: #777;
+  color: rgb(255, 255, 255);
   border-top: 1px solid #eaeaea;
+}
+.not-found {
+  text-align: center;
+}
+.not-found a {
+  color: #4979ff;
+  text-decoration: underline;
 }

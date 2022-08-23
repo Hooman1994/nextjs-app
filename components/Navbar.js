@@ -7,22 +7,22 @@ const NavBar = () => {
         <h1>NextJs</h1>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ margin: "10px" }}>
+        <div>
           <Link href="/">
             <a>Home</a>
           </Link>
         </div>
-        <div style={{ margin: "10px" }}>
+        <div>
           <Link href="/chart">
             <a>Chart</a>
           </Link>
         </div>
-        <div style={{ margin: "10px" }}>
+        <div>
           <Link href="/contact-us">
             <a>Contact Us</a>
           </Link>
         </div>
-        <div style={{ margin: "10px" }}>
+        <div>
           <Link href="/about">
             <a>About</a>
           </Link>

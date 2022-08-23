@@ -1,5 +1,3 @@
-import ReturnButton from "../components/ReturnButton";
-
 const about = () => {
   return (
     <div>
@@ -8,7 +6,6 @@ const about = () => {
         This is my first next js project that i'm trying to make a simple
         multipage application to show my skills
       </p>
-      <ReturnButton />
     </div>
   );
 };
