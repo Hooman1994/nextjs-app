@@ -1,26 +1,11 @@
 import React from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import axios from "axios";
 
-export const getStaticProps = async () => {
-  debugger
-  const result = await fetch("http://185.4.30.29:8090/api/portal/role/search", {
-    method: "POST",
-    body: {
-      sort: [],
-      filter: [],
-    },
-  });
-  const data = await result.json();
-  return {
-    props: data,
-  };
-};
-
-const Role = ({ data }) => {
+const Role = ({data}) => {
   return (
     <div>
-      {JSON.stringify(data, 2, null)}
       <div className="card">
         <DataTable value={data} responsiveLayout="scroll">
           <Column field="name" header="Name"></Column>
@@ -31,4 +16,17 @@ const Role = ({ data }) => {
   );
 };
 
+export const getStaticProps = async () => {
+  return axios
+    .post("http://185.4.30.29:8090/api/portal/role/search", {
+      sort: [],
+      filter: [],
+    })
+    .then((res) => {
+      console.log(res.data.data.model);
+      return {
+        props: { data: res.data.data.model },
+      };
+    });
+};
 export default Role;
