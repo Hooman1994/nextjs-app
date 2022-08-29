@@ -3,15 +3,25 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { BaseService } from "../api/BaseService";
 
-const Role = ({ props }) => {
+const Role = ({ items }) => {
   console.log("IM HERE");
-  console.log(props);
+  console.log(items);
   return (
     <div>
-      <div className="card"></div>
+      <div className="card">
+        {items &&
+          items.map((item, index) => {
+            return (
+              <div key={index}>
+                <h1>{item}</h1>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
+export default Role;
 
 Role.getInitialProps = async () => {
   let emptySearchModel = {
@@ -22,20 +32,12 @@ Role.getInitialProps = async () => {
     filter: null,
     ignorePagination: false,
   };
-  let errorText = {};
   const baseService = new BaseService("role");
-  baseService
-    .search(emptySearchModel)
-    .then((response2) => {
-      const roleData = response2.data.data.model;
-      console.log("HERE 3");
-      console.log(roleData);
-      return { props: { data: "Helloooowww" } };
-    })
-    .catch((err) => {
-      errorText = err;
-    });
-  return { props: { data: "Helloooowww" } };
+  const data = await baseService.search(emptySearchModel);
+  debugger
+  const items = await data.json();
+  return {
+    props: items,
+  };
 };
 
-export default Role;
