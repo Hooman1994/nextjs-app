@@ -29,6 +29,11 @@ const NavBar = () => {
           </Link>
         </div>
         <div>
+          <Link href="/markdown-editor">
+            <a>MarkDown Editor</a>
+          </Link>
+        </div>
+        <div>
           <Link href="/role">
             <a>Roles</a>
           </Link>
