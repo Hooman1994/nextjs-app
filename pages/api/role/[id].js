@@ -1,6 +1,7 @@
 import axios from "axios";
 
 function handler(req, res) {
+  debugger
   const httpMethod = req.method;
   const roleId = req.body.id;
   const { id, name, active } = req.body;
@@ -23,19 +24,32 @@ function handler(req, res) {
           active: active,
         })
         .then((res) => {
-          if(res.status == 200 || res.status == 202){
-            if(res.data.status){
+          if (res.status == 200 || res.status == 202) {
+            if (res.data.status) {
               res.data.data;
-            }else{
+            } else {
               res.data.message;
             }
-          }else{
-              
+          } else {
+            console.log("Process failed");
           }
         });
     case "DELETE":
-      res.status(200).json(result[0]);
-      break;
+      return axios
+        .delete(`http://185.4.30.29:8090/api/portal/role/ ${id}`, {
+          id: id,
+        })
+        .then((res) => {
+          if (res.status == 200 || res.status == 202) {
+            if (res.data.status) {
+              res.data.data;
+            } else {
+              res.data.message;
+            }
+          } else {
+            console.log("Process failed");
+          }
+        });
     default:
       res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
       res.status(405).end(`Method ${httpMethod} Is Not Allowed`);

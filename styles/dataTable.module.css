@@ -1,0 +1,12 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+.card .formField {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}

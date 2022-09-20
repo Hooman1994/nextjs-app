@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import handler from "../api/role/[id]";
+import generalHandler from "../api/role/index";
+import styles from "../../styles/dataTable.module.css";
 
 const Role = ({ data }) => {
   const emptyModel = {
@@ -12,8 +14,29 @@ const Role = ({ data }) => {
     name: "",
     active: true,
   };
-
   const [baseModel, setBaseModel] = useState(emptyModel);
+  const [newModel, setNewModel] = useState();
+
+  const confirmDeleteProduct = (rowData) => {
+    handler({ method: "DELETE", body: { id: rowData.id } }, {});
+    setNewModel();
+  };
+  const actionBodyTemplate = (rowData) => {
+    return (
+      <React.Fragment>
+        <Button
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-warning"
+          onClick={() => confirmDeleteProduct(rowData)}
+        />
+      </React.Fragment>
+    );
+  };
+
+  useEffect(() => {
+    debugger;
+    generalHandler({ method: "POST", body: { sort: [], filter: [] } });
+  }, [newModel]);
 
   function handleInputChange(e, name) {
     const val = (e.target && e.target.value) || "";
@@ -21,33 +44,23 @@ const Role = ({ data }) => {
     _baseModel[name] = val;
     setBaseModel(_baseModel);
   }
-
   function handleSubmit() {
+    debugger;
     let _baseModel = baseModel;
-    handler({ method: "PUT", body: _baseModel }, {});
-    // async () => {
-    //   return axios
-    //     .put("http://185.4.30.29:8090/api/portal/role/merge", {
-    //       name: _baseModel.name,
-    //       active: _baseModel.active,
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //       setBaseModel(emptyModel);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // };
+    handler({ method: "PUT", body: _baseModel }, {}).then(() => {
+      setBaseModel({ ...baseModel, name: "" });
+    });
   }
-
   return (
     <div>
-      <InputText onChange={(e) => handleInputChange(e, "name")} />
-      <Button label="Submit" onClick={handleSubmit} />
-      <div className="card">
+      <div className={styles.card}>
+        <div className={styles.formField}>
+          <InputText onChange={(e) => handleInputChange(e, "name")} />
+          <Button label="Submit" onClick={handleSubmit} />
+        </div>
         <DataTable value={data} responsiveLayout="scroll">
           <Column field="name" header="Name"></Column>
+          <Column body={actionBodyTemplate} exportable={false}></Column>
         </DataTable>
       </div>
     </div>
