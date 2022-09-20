@@ -69,7 +69,7 @@ const Role = ({ data }) => {
 
 export const getStaticProps = async () => {
   return axios
-    .post("http://185.4.30.29:8090/api/portal/role/search", {
+    .post("http://api.fartakda.com/v1/portal/role/search", {
       sort: [],
       filter: [],
     })
