@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import handler from "../api/role/[id]";
 import generalHandler from "../api/role/index";
-import styles from "../../styles/dataTable.module.css";
+import styles from "../../styles/dataTable.module.scss";
 
 const Role = ({ data }) => {
   const emptyModel = {
@@ -20,6 +20,7 @@ const Role = ({ data }) => {
   const confirmDeleteProduct = (rowData) => {
     handler({ method: "DELETE", body: { id: rowData.id } }, {});
     setNewModel();
+    location.reload();
   };
   const actionBodyTemplate = (rowData) => {
     return (
@@ -47,9 +48,13 @@ const Role = ({ data }) => {
   function handleSubmit() {
     debugger;
     let _baseModel = baseModel;
-    handler({ method: "PUT", body: _baseModel }, {}).then(() => {
-      setBaseModel({ ...baseModel, name: "" });
-    });
+    handler({ method: "PUT", body: _baseModel }, {})
+      .then(() => {
+        setBaseModel({ ...baseModel, name: "" });
+      })
+      .then(() => {
+        location.reload();
+      });
   }
   return (
     <div>
@@ -58,16 +63,18 @@ const Role = ({ data }) => {
           <InputText onChange={(e) => handleInputChange(e, "name")} />
           <Button label="Submit" onClick={handleSubmit} />
         </div>
-        <DataTable value={data} responsiveLayout="scroll">
-          <Column field="name" header="Name"></Column>
-          <Column body={actionBodyTemplate} exportable={false}></Column>
-        </DataTable>
+        <div className={styles.formField}>
+          <DataTable value={data} responsiveLayout="scroll">
+            <Column field="name" header="Name"></Column>
+            <Column body={actionBodyTemplate} exportable={false}></Column>
+          </DataTable>
+        </div>
       </div>
     </div>
   );
 };
 
-export const getStaticProps = async () => {
+export function getStaticProps() {
   return axios
     .post("http://api.fartakda.com/v1/portal/role/search", {
       sort: [],
@@ -78,5 +85,5 @@ export const getStaticProps = async () => {
         props: { data: res.data.data.model },
       };
     });
-};
+}
 export default Role;

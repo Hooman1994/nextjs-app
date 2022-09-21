@@ -18,7 +18,7 @@ function handler(req, res) {
       break;
     case "PUT":
       return axios
-        .put("http://185.4.30.29:8090/api/portal/role/merge", {
+        .put("http://api.fartakda.com/v1/portal/role/merge", {
           id: id,
           name: name,
           active: active,
@@ -36,7 +36,7 @@ function handler(req, res) {
         });
     case "DELETE":
       return axios
-        .delete(`http://185.4.30.29:8090/api/portal/role/ ${id}`, {
+        .delete(`http://api.fartakda.com/v1/portal/role/ ${id}`, {
           id: id,
         })
         .then((res) => {
