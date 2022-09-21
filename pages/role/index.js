@@ -18,9 +18,10 @@ const Role = ({ data }) => {
   const [newModel, setNewModel] = useState();
 
   const confirmDeleteProduct = (rowData) => {
-    handler({ method: "DELETE", body: { id: rowData.id } }, {});
-    setNewModel();
-    location.reload();
+    handler({ method: "DELETE", body: { id: rowData.id } }, {}).then(() => {
+      setNewModel();
+      location.reload();
+    });
   };
   const actionBodyTemplate = (rowData) => {
     return (
@@ -51,10 +52,8 @@ const Role = ({ data }) => {
     handler({ method: "PUT", body: _baseModel }, {})
       .then(() => {
         setBaseModel({ ...baseModel, name: "" });
-      })
-      .then(() => {
         location.reload();
-      });
+      })
   }
   return (
     <div>
