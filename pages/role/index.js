@@ -49,11 +49,10 @@ const Role = ({ data }) => {
   function handleSubmit() {
     debugger;
     let _baseModel = baseModel;
-    handler({ method: "PUT", body: _baseModel }, {})
-      .then(() => {
-        setBaseModel({ ...baseModel, name: "" });
-        location.reload();
-      })
+    handler({ method: "PUT", body: _baseModel }, {}).then(() => {
+      setBaseModel({ ...baseModel, name: "" });
+      location.reload();
+    });
   }
   return (
     <div>
@@ -64,8 +63,12 @@ const Role = ({ data }) => {
         </div>
         <div className={styles.formField}>
           <DataTable value={data} responsiveLayout="scroll">
-            <Column field="name" header="Name"></Column>
-            <Column body={actionBodyTemplate} exportable={false}></Column>
+            <Column field="name" header="Title" align="center"></Column>
+            <Column
+              header="Actions"
+              body={actionBodyTemplate}
+              exportable={false}
+            ></Column>
           </DataTable>
         </div>
       </div>
