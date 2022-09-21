@@ -65,6 +65,7 @@ const Role = ({ data }) => {
           <DataTable value={data} responsiveLayout="scroll">
             <Column field="name" header="Title" align="center"></Column>
             <Column
+              align="center"
               header="Actions"
               body={actionBodyTemplate}
               exportable={false}
